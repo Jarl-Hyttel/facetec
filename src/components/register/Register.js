@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Register has own state, so needs to be class. Needs props parameter since receives props from App
 class Register extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,7 +23,9 @@ class Register extends React.Component {
 		this.setState({name: event.target.value});
 	}
  
+
  	onSubmitSignIn = () => {
+ 		// fetch backend register endpoint and post input register form
 		fetch("https://thawing-reaches-89716.herokuapp.com/register", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
@@ -32,6 +35,7 @@ class Register extends React.Component {
 				name: this.state.name,
 			})
 		})
+			// then return user and load into App state, and change route to home
 			.then(response => response.json())
 			.then(user => {
 				if (user.id) {
@@ -46,6 +50,7 @@ class Register extends React.Component {
 			<article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
 				<main className="pa4 black-80">
 		  			<div className="measure">
+		  				{/* Techyon form */}
 				    	<fieldset id="sign_up" className="ba b--transparent ph0 mh0">
 					      	<legend className="f1 fw6 ph0 mh0">Register</legend>
 					      	<div className="mt3">
@@ -80,10 +85,7 @@ class Register extends React.Component {
 					      	</div>				     	 
 				    	</fieldset>
 				    	<div className="">
-				      		<input 
-				      		// Due to syntax of adding parameter to function call, the code now reads that the
-				      		// function should be called when this code is hit. But it should be run when the
-				      		// onClick event happens. An arrow function with the function defined as its return fixes this issue.
+				      		<input 				      	
 				      		onClick={this.onSubmitSignIn}
 				      		className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
 				      		type="submit" 
