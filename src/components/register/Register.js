@@ -23,9 +23,8 @@ class Register extends React.Component {
 		this.setState({name: event.target.value});
 	}
  
-
- 	onSubmitSignIn = () => {
- 		// fetch backend register endpoint and post input register form
+	// fetch backend register endpoint and post input register form
+ 	onSubmitSignIn = () => { 		
 		fetch("https://thawing-reaches-89716.herokuapp.com/register", {
 			method: "post",
 			headers: {"Content-Type": "application/json"},
